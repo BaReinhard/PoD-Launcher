@@ -554,17 +554,19 @@ Public Class Form1
         Dim uptodate As Boolean = False
 
         'crc = "" -> only check if file exists, don't actually check the crc
-        If My.Computer.FileSystem.FileExists(file.Name) Then
-            Log("File " & file.Name & " already exists, no need to download again.")
-            uptodate = True
-        Else
-            file.Crc = "-1"
+        If file.Crc.Equals("") Then
+            If My.Computer.FileSystem.FileExists(file.Name) Then
+                Log("File " & file.Name & " already exists, no need to download again.")
+                uptodate = True
+            Else
+                file.Crc = "-1"
+            End If
         End If
 
         'no need to update if file has same crc as the servers file
         Dim localCrc As String = GetCRC32(file.Name)
         Log("File " & file.Name & "LocalCRC: " & localCrc & "Server CRC: " & file.Crc & "uptodate: " & uptodate.ToString())
-        If file.Crc.Equals(localCrc) And uptodate Then
+        If file.Crc.Equals(localCrc) And Not uptodate Then
             Log("File " & file.Name & " is up-to-date")
             Return 0
         End If
