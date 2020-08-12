@@ -421,7 +421,7 @@ Public Class Form1
 
             Dim file As String = "./tmp/files.xml"
 
-            Dim xmlLink As String = "https://raw.githubusercontent.com/GreenDude120/PoD-Launcher/master/files.xml"
+            Dim xmlLink As String = "https://raw.githubusercontent.com/BaReinhard/PoD-Launcher/master/files.xml"
             Dim dl As WebClient = New WebClient()
             Try
                 dl.DownloadFile(xmlLink, file)
@@ -554,13 +554,11 @@ Public Class Form1
         Dim uptodate As Boolean = False
 
         'crc = "" -> only check if file exists, don't actually check the crc
-        If file.Crc.Equals("") Then
-            If IO.File.Exists(file.Name) Then
-                Log("File " & file.Name & " already exists, no need to download again.")
-                uptodate = True
-            Else
-                file.Crc = "-1"
-            End If
+        If My.Computer.FileSystem.FileExists(file.Name) Then
+            Log("File " & file.Name & " already exists, no need to download again.")
+            uptodate = True
+        Else
+            file.Crc = "-1"
         End If
 
         'no need to update if file has same crc as the servers file
@@ -571,7 +569,7 @@ Public Class Form1
         End If
 
         If Not uptodate Then
-            If IO.File.Exists(file.Name) Then
+            If My.Computer.FileSystem.FileExists(file.Name) Then
                 Try
                     IO.File.Move(file.Name, "./tmp/" & file.Name)
                 Catch ex As Exception
