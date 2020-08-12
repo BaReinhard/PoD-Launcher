@@ -554,7 +554,7 @@ Public Class Form1
         Dim uptodate As Boolean = False
 
         'crc = "" -> only check if file exists, don't actually check the crc
-        If file.Crc.Equals("") Then
+        If file.Crc.Equals("") Or file.Crc.Equals("0") Then
             If My.Computer.FileSystem.FileExists(file.Name) Then
                 Log("File " & file.Name & " already exists, no need to download again.")
                 uptodate = True
@@ -620,7 +620,7 @@ Public Class Form1
 
                 localCrc = GetCRC32(file.Name)
                 If Not file.Crc.Equals("-1") And Not file.Crc.Equals(localCrc) Then
-                    Log("Checksum of downloaded file (" & file.Name & ") from " & link.Link & " doesn't match the specified checksum.")
+                    Log("Checksum of downloaded file (" & file.Name & ") from " & link.Link & " doesn't match the specified checksum. Server CRC: " & file.Crc & "Local CRC: " & localCrc)
                     Continue For
                 End If
 
