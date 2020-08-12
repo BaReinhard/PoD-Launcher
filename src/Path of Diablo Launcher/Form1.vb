@@ -563,7 +563,7 @@ Public Class Form1
 
         'no need to update if file has same crc as the servers file
         Dim localCrc As String = GetCRC32(file.Name)
-        If file.Crc.Equals(localCrc) And Not uptodate Then
+        If file.Crc.Equals(localCrc) And uptodate Then
             Log("File " & file.Name & " is up-to-date")
             Return 0
         End If
