@@ -7,6 +7,7 @@
 	<file name="D2PoDClient.dll" crc="921347F8">
 		<link>https://d2.lc/D2PoDClient.dll</link>
 		<link>http://198.98.51.238:8080/public/D2PoDClient.dll</link>
+		<link>https://storage.googleapis.com/pod-assets/D2PoDClient.dll</link>
 	</file>
 	<file name="pod.dll" crc="CCD77B3F">
 		<link>https://d2.lc/pod.dll</link>
